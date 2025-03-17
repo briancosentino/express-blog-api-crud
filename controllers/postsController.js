@@ -7,7 +7,23 @@ function show (req, res){
     res.json(posts.find(post => post.slug === req.params.id ))
 }
 function store (req, res){
-    res.send('create post')
+    const newId = 23876328
+    const newPost = {
+        title: req.body.title,
+        slug : req.body.slug,
+        content : req.body.content,
+        image : req.body.image,
+        tags : req.body.tags
+
+    }
+
+    posts.push(newPost)
+    console.log(posts);
+    console.log(req.body);
+    
+    res.status(201)
+    res.json(newPost)
+  
 }
 function update (req, res){
     res.json(posts.find(post => post.id === req.params.id ))
