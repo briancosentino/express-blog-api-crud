@@ -26,7 +26,27 @@ function store (req, res){
   
 }
 function update (req, res){
-    res.json(posts.find(post => post.id === req.params.id ))
+    const slug = req.params.slug
+    const post = posts.find(post=> post.slug === slug)
+    
+    
+    if(!post){
+        res.status(404)
+        console.log(posts);
+        
+        return res.json({
+            error : 'error',
+            message : 'post not found'
+        })
+    }
+   
+    post.content = req.body.content
+    post.image = req.body.image
+    post.tags = req.body.tags
+
+    console.log(posts);
+    res.json(post)
+    
 }
 function modify (req, res){
     res.send('modify whole post' + req.params.id)
