@@ -36,9 +36,14 @@ const app = express();
 const port = 3001
 
 const postsRouter = require('./routers/postList')
-
+const logger = require('./middlewares/logger')
+const serverError = require('./middlewares/serverError')
+const notFound = require('./middlewares/notFound')
 app.use(express.json());
 app.use('/postsList', postsRouter)
+app.use(logger)
+app.use(serverError)
+app.use(notFound)
 
 app.listen(port, ()=>{
     console.log(`Server is running on http://localhost:${port}`);
